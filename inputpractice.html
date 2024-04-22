@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取得使用者輸入</title>
+
+    <style>
+        p {
+            font-size: 20px;
+        }
+
+        input {
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+        }
+    </style>
+
+
+</head>
+    <body>
+        <input class="inputHeight" placeholder="請輸入身高(公分)"> <br>
+        <input class="inputWeight" placeholder="請輸入體重(公斤)"> <br>
+        <button onclick="calculateBMI();">計算BMI</button>
+        <p class="converBMI">BMI:</p>
+        <p class="desBMI">指標:</p>
+
+    
+    </body>
+    <script>
+        function calculateBMI() {
+            //身高
+            let heightElement = document.querySelector('.inputHeight').value; // 宣告heightElement此變數，等於input內的值，innerHtml:標籤開始與結束之間的字串，value:input內輸入的值
+            heightElement = Number(heightElement); // 將heightElement變為數字型態
+            heightElement /=100  ; //計算公分轉公尺
+
+            //體重
+            let weightElement = document.querySelector('.inputWeight').value;
+            weightElement = Number(weightElement);
+
+            //計算BMI
+            let BMI = weightElement / (heightElement*heightElement); 
+            BMI = Math.round(BMI *10) / 10; // 四捨五入取第一位數
+
+
+            //值塞到P
+            let pElement = document.querySelector('.converBMI'); //宣告pElement此變數
+            pElement.innerHTML = `BMI: ${BMI}`; //改變p內的文字
+
+            //判斷BMI指標
+            let desElement = document.querySelector('.desBMI');
+            if (BMI < 18.5){
+                desElement.innerHTML = '指標:過輕';
+            }else if (18.5 <= BMI && BMI < 24) {
+                desElement.innerHTML = '指標:正常';
+            }else {
+                desElement.innerHTML = '指標:過重';
+            };
+            
+        }
+    </script>
+
+
+</html>
